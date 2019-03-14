@@ -1,0 +1,12 @@
+name: MLB_Postseason_wOBAs
+title: MLB_Postseason_wOBAs
+username:
+account: stat331baseballproject
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 576716
+bundleId: 1705011
+url: https://stat331baseballproject.shinyapps.io/MLB_Postseason_wOBAs/
+when: 1542393867.67365
+asMultiple: FALSE
+asStatic: FALSE

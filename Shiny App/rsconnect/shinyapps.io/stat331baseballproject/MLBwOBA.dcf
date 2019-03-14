@@ -1,0 +1,13 @@
+name: MLBwOBA
+title: MLBwOBA
+username:
+account: stat331baseballproject
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 611050
+bundleId: 1753265
+url: https://stat331baseballproject.shinyapps.io/MLBwOBA/
+when: 1544464811.44604
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Archive.zip|Report.html|Report.Rmd
