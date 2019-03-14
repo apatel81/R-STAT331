@@ -1,0 +1,77 @@
+---
+title: "Lab 8 "
+---
+Ajay Patel
+
+```{r}
+#1
+avocados <- read.csv("/Users/ajaypatel21/Downloads/avocado.csv")
+library(stringr)
+library(dplyr)
+library(ggplot2)
+colnames(avocados) = c("X1", "Date", "AveragePrice", "TotalVolume", "X4046", "X4225", "X4770", "TotalBags", "SmallBags", "LargeBags", "XLargeBags", "type", "year", "region")
+names(avocados)
+
+
+
+```
+
+
+```{r}
+#2
+
+avocados%>%
+  pull(region) 
+
+avg_volume = tapply(avocados$TotalVolume, avocados$region, mean, na.rm = T)
+sorted_avg_volume <- order(avg_volume, decreasing = T)
+topsorted_avg_volume <- names(avg_volume[sorted_avg_volume])[2:6]
+topsorted_avg_volume_data = filter(avocados, region %in% topsorted_avg_volume)
+
+ggplot(data = topsorted_avg_volume_data, aes(x = region, y = TotalVolume, fill = region)) + geom_boxplot() + ggtitle("Highest Average Total Volume") + xlab("Region") + ylab("Total Volume")
+```
+
+```{r}
+#3
+
+year_inc <- sort(avocados$year, decreasing = F)
+year_inc[1]
+year_dec <- sort(avocados$year, decreasing = T)
+year_dec[1]
+
+my_years <- filter(avocados, year %in% c(year_inc[1], year_dec[1]))
+
+ggplot(data = my_years, aes(x = AveragePrice, group = my_years$year, fill = year, color = year)) + geom_histogram()
+
+```
+
+```{r}
+#4
+
+sum_bag <- tapply(avocados$TotalVolume, avocados$type, sum, na.rm = T)
+organized_bag <- order(sum_bag, decreasing = T)
+greatest_bag <- names(sum_bag[organized_bag])[1]
+greatest_bag_data <- filter(avocados, type %in% greatest_bag)
+
+ggplot(data = greatest_bag_data, aes(x = AveragePrice, y = TotalVolume)) + geom_point() +
+  ggtitle("Average Price vs Total Volume for the Greatest Type of Avocado") + xlab("Average Price") +
+  ylab("Total Volume")
+```
+
+
+```{r}
+#5
+
+sum_small_bags <- tapply(avocados$SmallBags, avocados$region, sum, na.rm = T)
+organized_sum_small_bags <- order(sum_small_bags, decreasing = F)
+seven_smallest <- names(sum_small_bags[organized_sum_small_bags])[1:7]
+seven_smallest_data <- filter(avocados, region %in% seven_smallest)
+
+ggplot(data = seven_smallest_data, aes(x = region, color = type, fill = type)) +
+  geom_bar(position = position_dodge()) + 
+  ggtitle("7 Regions Selling the Least Amount of Small Bags by Type of Avocados") + xlab("Region") +
+  ylab("Count")
+
+
+```
+
